@@ -62,15 +62,23 @@ def parse_dot_content(dot_content):
 
 
 
-
 def display_relationships_definition():
     """Sub-task for defining relationships and visualizing them as a causal graph."""
+    
+    def sanitize_dot(dot_str):
+        """Clean the ending of a dot string if necessary."""
+        if dot_str.endswith('"; }'):
+            return dot_str[:-4] + '}'
+        return dot_str
     
     st.subheader("Upload a DOT File (Optional)")
     uploaded_file = st.file_uploader("Choose a DOT file", type=["dot"])
     
     if uploaded_file:
         dot_content = uploaded_file.read().decode()
+        
+        # Sanitize the uploaded DOT content
+        dot_content = sanitize_dot(dot_content)
         
         # Debugging line to show uploaded DOT content
         st.write("Uploaded DOT content:", dot_content)
@@ -122,6 +130,9 @@ def display_relationships_definition():
             dot_representation += f'    "{relation[0]}" -> "{relation[1]}";\n'
         dot_representation += "}"
 
+        # Sanitize the generated DOT representation
+        dot_representation = sanitize_dot(dot_representation)
+        
         # Debugging line to show the generated DOT representation
         st.write("Generated DOT representation:", dot_representation)
 
@@ -134,6 +145,7 @@ def display_relationships_definition():
 
         # Provide the download link for the DOT file
         st.markdown(generate_dot_download_link(dot_representation), unsafe_allow_html=True)
+
 
 
 
