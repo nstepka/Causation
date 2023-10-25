@@ -64,15 +64,21 @@ def display_relationships_definition():
             st.session_state.relationships.append(relationship)
         st.success(f"Added relationship: {cause_column} -> {effect_column}")
 
-    # Display existing relationships and allow removal
+    # Display existing relationships and allow removal via dropdown
     if "relationships" in st.session_state and st.session_state.relationships:
         st.write("Defined Relationships:")
-        for idx, (cause, effect) in enumerate(st.session_state.relationships):
-            st.write(f"{cause} -> {effect}")
-            remove_button = st.button(f"Remove {cause} -> {effect}")
-            if remove_button:
-                st.session_state.relationships.remove((cause, effect))
-                st.success(f"Removed relationship: {cause} -> {effect}")
+        
+        # Create a list of relationship strings for the dropdown
+        relationship_strings = [f"{cause} -> {effect}" for cause, effect in st.session_state.relationships]
+        
+        selected_relationship = st.selectbox("Select a relationship to remove", relationship_strings)
+        
+        # Display a button for the user to confirm the removal
+        if st.button("Remove Selected Relationship"):
+            # Convert string back to tuple
+            cause, effect = selected_relationship.split(" -> ")
+            st.session_state.relationships.remove((cause, effect))
+            st.success(f"Removed relationship: {cause} -> {effect}")
 
     # Generate causal graph button
     if st.button("Generate Causal Graph"):
@@ -90,6 +96,7 @@ def display_relationships_definition():
             
             # Display the graph
             st.graphviz_chart(dot)
+
 
 
 
