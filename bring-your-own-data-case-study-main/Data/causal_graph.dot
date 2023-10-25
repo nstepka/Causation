@@ -1,0 +1,33 @@
+digraph {
+    grill -> price;
+    pool -> price;
+    "hot tub" -> price;
+    "hot tub" -> bathrooms;
+    pool -> bathrooms;
+    "private entrance" -> price;
+    "private entrance" -> "resort access";
+    fireplace -> price;
+    neighbourhood_cleansed_num -> price;
+    neighbourhood_cleansed_num -> review_scores_location;
+    review_scores_location -> review_scores_rating;
+    review_scores_location -> reviews_per_month;
+    review_scores_rating -> reviews_per_month;
+    reviews_per_month -> price;
+    host_is_superhost -> reviews_per_month;
+    host_is_superhost -> price;
+    host_is_superhost -> review_scores_rating;
+    host_acceptance_rate -> reviews_per_month;
+    host_acceptance_rate -> price;
+    beds -> bedrooms;
+    bedrooms -> accommodates;
+    bedrooms -> bathrooms;
+    accommodates -> price;
+    "resort access" -> pool;
+    "resort access" -> "hot tub";
+    pool -> host_acceptance_rate;
+    "hot tub" -> host_acceptance_rate;
+    bathrooms -> price;
+    minimum_minimum_nights -> price;
+    minimum_maximum_nights -> price;
+    "resort access" -> price;
+}
