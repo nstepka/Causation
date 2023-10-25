@@ -178,7 +178,7 @@ def display_causal_model_creation():
         # Sanitize the dot_representation
         dot_representation = dot_representation[:-4]
         dot_representation = dot_representation.rstrip("}")
-        dot_representation += "}"
+        dot_representation += ";}"
         st.write("Generated DOT representation:", dot_representation)
         
         # Explicitly set it in the session state
