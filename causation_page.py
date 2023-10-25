@@ -130,9 +130,6 @@ def display_relationships_definition():
             dot_representation += f'    "{relation[0]}" -> "{relation[1]}";\n'
         dot_representation += "}"
 
-        # Sanitize the generated DOT representation
-        dot_representation = sanitize_dot(dot_representation)
-        
         # Debugging line to show the generated DOT representation
         st.write("Generated DOT representation:", dot_representation)
 
@@ -145,6 +142,7 @@ def display_relationships_definition():
 
         # Provide the download link for the DOT file
         st.markdown(generate_dot_download_link(dot_representation), unsafe_allow_html=True)
+        
 
 
 
