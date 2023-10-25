@@ -38,13 +38,9 @@ from dowhy import CausalModel
 import re
 import graphviz
 from graphviz import Digraph
-import pygraphviz as pgv
 from io import BytesIO
 
 
-
-import pygraphviz as pgv
-from io import BytesIO
 
 def display_relationships_definition():
     st.subheader("Define Causal Relationships")
@@ -111,7 +107,6 @@ def display_relationships_definition():
     if uploaded_file:
         uploaded_graph = uploaded_file.read().decode()
         st.graphviz_chart(uploaded_graph)
-
 
 
 
