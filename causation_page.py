@@ -178,7 +178,11 @@ def display_causal_model_creation():
         # Define Causal Model
         # Sanitize the dot_representation
         dot_representation = dot_representation[:-4] + '}'
-
+        st.write("Generated DOT representation:", dot_representation)
+        
+        # Explicitly set it in the session state
+        st.session_state.dot_representation = dot_representation
+        
         try:
             model = CausalModel(
                 data=st.session_state.data,
@@ -188,7 +192,7 @@ def display_causal_model_creation():
             )
         
         except ValueError as e:
-            st.error(st.session_state.get('dot_representation))
+            st.error(f"Error creating the CausalModel. Graph used:\n{dot_representation}")
             return
         # Identification
         identified_estimand = model.identify_effect(proceed_when_unidentifiable=True)
