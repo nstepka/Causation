@@ -65,24 +65,11 @@ def parse_dot_content(dot_content):
 def display_relationships_definition():
     """Sub-task for defining relationships and visualizing them as a causal graph."""
     
-    def sanitize_dot(dot_str):
-        """Clean the ending of a dot string if necessary."""
-        if dot_str.endswith('"; }'):
-            return dot_str[:-4] + '}'
-        return dot_str
-    
     st.subheader("Upload a DOT File (Optional)")
     uploaded_file = st.file_uploader("Choose a DOT file", type=["dot"])
     
     if uploaded_file:
         dot_content = uploaded_file.read().decode()
-        
-        # Sanitize the uploaded DOT content
-        dot_content = sanitize_dot(dot_content)
-        
-        # Debugging line to show uploaded DOT content
-        st.write("Uploaded DOT content:", dot_content)
-        
         st.session_state.dot_representation = dot_content
         st.success("DOT file uploaded successfully!")
         uploaded_graph = graphviz.Source(dot_content)
@@ -128,11 +115,7 @@ def display_relationships_definition():
         dot_representation = "digraph {\n"
         for relation in st.session_state.relationships:
             dot_representation += f'    "{relation[0]}" -> "{relation[1]}";\n'
-        dot_representation = dot_representation.rstrip()  # Remove trailing spaces or newlines
-        dot_representation += "}"  # Close the digraph
-
-        # Debugging line to show the generated DOT representation
-        st.write("Generated DOT representation:", dot_representation)
+        dot_representation += "}"
 
         # Explicitly set it in the session state
         st.session_state.dot_representation = dot_representation
@@ -143,7 +126,6 @@ def display_relationships_definition():
 
         # Provide the download link for the DOT file
         st.markdown(generate_dot_download_link(dot_representation), unsafe_allow_html=True)
-        
 
 
 
@@ -175,26 +157,14 @@ def display_causal_model_creation():
 
     if st.button("Create and Estimate Causal Model"):
         # Define Causal Model
-        # Sanitize the dot_representation
-        dot_representation = dot_representation[:-4]
-        dot_representation = dot_representation.rstrip("}")
-        dot_representation += "}"
-        st.write("Generated DOT representation:", dot_representation)
+        model = CausalModel(
+            data=st.session_state.data,
+            treatment=treatment,
+            outcome=outcome,
+            graph=st.session_state.get("dot_representation", "")
+        )
         
-        # Explicitly set it in the session state
-        st.session_state.dot_representation = dot_representation
         
-        try:
-            model = CausalModel(
-                data=st.session_state.data,
-                treatment=treatment,
-                outcome=outcome,
-                graph= "digraph { "accommodates" -> "price"; "bedrooms" -> "accommodates"; "beds" -> "bedrooms"; "bathrooms" -> "bedrooms"; "bathrooms" -> "price";)"
-            )
-        
-        except ValueError as e:
-            st.error(f"Error creating the CausalModel. Graph used:\n{dot_representation}")
-            return
         # Identification
         identified_estimand = model.identify_effect(proceed_when_unidentifiable=True)
         st.session_state.identified_estimand = identified_estimand
@@ -303,4 +273,5 @@ def causality_page():
         display_causal_model_creation()
     elif task == "Run Refutation Tests":
         display_refutation_tests()
+
 
