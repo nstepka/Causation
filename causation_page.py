@@ -157,14 +157,17 @@ def display_causal_model_creation():
 
     if st.button("Create and Estimate Causal Model"):
         # Define Causal Model
-        model = CausalModel(
-            data=st.session_state.data,
-            treatment=treatment,
-            outcome=outcome,
-            graph=st.session_state.get("dot_representation", "")
-        )
+        try:
+            model = CausalModel(
+                data=st.session_state.data,
+                treatment=treatment,
+                outcome=outcome,
+                graph=st.session_state.get("dot_representation", "")
+            )
         
-        
+        except ValueError as e:
+            st.error(f"Error creating the CausalModel. Graph used:\n{st.session_state.get('dot_representation', '')}")
+            return
         # Identification
         identified_estimand = model.identify_effect(proceed_when_unidentifiable=True)
         st.session_state.identified_estimand = identified_estimand
