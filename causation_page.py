@@ -38,8 +38,13 @@ from dowhy import CausalModel
 import re
 import graphviz
 from graphviz import Digraph
+import pygraphviz as pgv
+from io import BytesIO
 
 
+
+import pygraphviz as pgv
+from io import BytesIO
 
 def display_relationships_definition():
     st.subheader("Define Causal Relationships")
@@ -69,11 +74,9 @@ def display_relationships_definition():
         st.write("Defined Relationships:")
         
         st.write("Select Relationship to Remove:")
-        # Create a dropdown with all relationships formatted as "cause -> effect"
         relationship_options = [f"{cause} -> {effect}" for cause, effect in st.session_state.relationships]
         selected_relationship_str = st.selectbox("", relationship_options)
         
-        # Extract cause and effect from the selected string
         selected_cause, selected_effect = selected_relationship_str.split(" -> ")
 
         if st.button(f"Remove {selected_cause} -> {selected_effect}"):
@@ -89,7 +92,7 @@ def display_relationships_definition():
             dot = Digraph()
             for cause, effect in st.session_state.relationships:
                 dot.edge(cause, effect)
-            
+
             # Convert dot to string and save in session state
             st.session_state.dot_representation = dot.source
             st.session_state.generated_graph = True
@@ -97,7 +100,17 @@ def display_relationships_definition():
             # Display the graph
             st.graphviz_chart(dot)
 
+    # Save the graph to a .dot file and provide a download link
+    if "dot_representation" in st.session_state and st.session_state.dot_representation:
+        with open("causal_graph.dot", "w") as f:
+            f.write(st.session_state.dot_representation)
+        st.markdown(generate_download_link("causal_graph.dot", "Download the causal graph"), unsafe_allow_html=True)
 
+    # Upload a .dot file and load the graph
+    uploaded_file = st.file_uploader("Upload a .dot file to load a causal graph", type="dot")
+    if uploaded_file:
+        uploaded_graph = uploaded_file.read().decode()
+        st.graphviz_chart(uploaded_graph)
 
 
 
