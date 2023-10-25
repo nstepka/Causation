@@ -10,3 +10,4 @@ statsmodels==0.13.5
 streamlit==1.23.1
 xgboost==1.6.2
 dowhy==0.6
+graphviz==0.20.1
