@@ -62,6 +62,7 @@ def parse_dot_content(dot_content):
 
 
 
+
 def display_relationships_definition():
     """Sub-task for defining relationships and visualizing them as a causal graph."""
     
@@ -70,6 +71,10 @@ def display_relationships_definition():
     
     if uploaded_file:
         dot_content = uploaded_file.read().decode()
+        
+        # Debugging line to show uploaded DOT content
+        st.write("Uploaded DOT content:", dot_content)
+        
         st.session_state.dot_representation = dot_content
         st.success("DOT file uploaded successfully!")
         uploaded_graph = graphviz.Source(dot_content)
@@ -117,6 +122,9 @@ def display_relationships_definition():
             dot_representation += f'    "{relation[0]}" -> "{relation[1]}";\n'
         dot_representation += "}"
 
+        # Debugging line to show the generated DOT representation
+        st.write("Generated DOT representation:", dot_representation)
+
         # Explicitly set it in the session state
         st.session_state.dot_representation = dot_representation
 
@@ -126,7 +134,6 @@ def display_relationships_definition():
 
         # Provide the download link for the DOT file
         st.markdown(generate_dot_download_link(dot_representation), unsafe_allow_html=True)
-
 
 
 
