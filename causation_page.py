@@ -41,8 +41,6 @@ from graphviz import Digraph
 from io import BytesIO
 
 
-
-
 def extract_relationships_from_dot(dot_representation):
     """Extract relationships from DOT format."""
     relationships = []
@@ -57,6 +55,12 @@ def extract_relationships_from_dot(dot_representation):
         relationships.append((cause.strip(), effect.strip()))
     
     return relationships
+
+def generate_download_link(filename, content, download_text):
+    """Generate a download link for a given content and link text."""
+    b64 = base64.b64encode(content.encode()).decode()
+    href = f'<a href="data:application/octet-stream;base64,{b64}" download="{filename}">{download_text}</a>'
+    return href
 
 def display_relationships_definition():
     st.subheader("Define Causal Relationships")
@@ -124,11 +128,16 @@ def display_relationships_definition():
                 dot.edge(cause, effect)
             
             # Convert dot to string and save in session state
-            st.session_state.dot_representation = dot.source
+            dot_representation = dot.source
+            st.session_state.dot_representation = dot_representation
             st.session_state.generated_graph = True
             
             # Display the graph
             st.graphviz_chart(dot)
+
+            # Provide the download link
+            download_link = generate_download_link("causal_graph.dot", dot_representation, "Download Causal Graph (.dot)")
+            st.markdown(download_link, unsafe_allow_html=True)
 
 
 
