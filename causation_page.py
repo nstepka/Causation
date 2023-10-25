@@ -167,13 +167,11 @@ def display_causal_model_creation():
             treatment=treatment,
             outcome=outcome,
             graph="digraph { 
-    "accommodates" -> "price";
-    "bedrooms" -> "accommodates";
-    "beds" -> "bedrooms";
-    "bathrooms" -> "bedrooms";
-    "bathrooms" -> "price"; }
-"
-        )
+                      "accommodates" -> "price";
+                       "bedrooms" -> "accommodates";
+                        "beds" -> "bedrooms";
+                        "bathrooms" -> "bedrooms";
+                        "bathrooms" -> "price";}"         )
         
         
         # Identification
