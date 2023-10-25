@@ -116,14 +116,14 @@ def display_relationships_definition():
         for relation in st.session_state.relationships:
             dot_representation += f'    "{relation[0]}" -> "{relation[1]}";\n'
         dot_representation = dot_representation.rstrip()  # Remove trailing spaces or newlines
-        dot_representation += "}"  # Close the digraph
+        dot_representation += "\n}"  # Close the digraph with a newline and bracket
 
         # Debugging line to show the generated DOT representation
         st.write("Generated DOT representation:", dot_representation)
 
         # Explicitly set it in the session state
         st.session_state.dot_representation = dot_representation
-
+    
         graph = graphviz.Source(dot_representation)
         st.graphviz_chart(graph.source)
         st.session_state.generated_graph = True  # Mark that the graph has been generated
