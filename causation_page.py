@@ -114,7 +114,7 @@ def display_relationships_definition():
     if st.button("Generate Causal Graph"):
         dot_representation = "digraph {\n"
         for relation in st.session_state.relationships:
-            dot_representation += f'    "{relation[0]}" -> "{relation[1]}";\n'
+            dot_representation += f'    "{relation[0]}" -> "{relation[1]}"\n'
         dot_representation += "}"
 
         # Explicitly set it in the session state
