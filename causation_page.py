@@ -129,7 +129,7 @@ def display_relationships_definition():
             
             # Provide a download link for the graph
             # Save the graph representation as a temporary .dot file
-            temp_filename = "/mnt/data/causal_graph.dot"
+            temp_filename = "causal_graph.dot"
             with open(temp_filename, "w") as f:
                 f.write(dot.source)
             
