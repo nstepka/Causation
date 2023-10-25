@@ -178,6 +178,7 @@ def display_causal_model_creation():
         # Define Causal Model
         # Sanitize the dot_representation
         dot_representation = dot_representation[:-4]
+        dot_representation = dot_representation.rstrip("}")
         st.write("Generated DOT representation:", dot_representation)
         
         # Explicitly set it in the session state
