@@ -168,10 +168,10 @@ def display_causal_model_creation():
                   outcome=outcome,
                   graph="digraph { 
                            "accommodates" -> "price";
-                            "bedrooms" -> "accommodates";
-                            "beds" -> "bedrooms";
-                            "bathrooms" -> "bedrooms";
-                            "bathrooms" -> "price";}"    
+                           "bedrooms" -> "accommodates";
+                           "beds" -> "bedrooms";
+                           "bathrooms" -> "bedrooms";
+                           "bathrooms" -> "price";}"    
 
         
         
