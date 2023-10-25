@@ -68,14 +68,17 @@ def display_relationships_definition():
     if "relationships" in st.session_state and st.session_state.relationships:
         st.write("Defined Relationships:")
         
-        # Create a dropdown with all relationships
-        relationship_to_remove = st.selectbox(
-            "Select a relationship to remove",
-            st.session_state.relationships
-        )
-        if st.button(f"Remove {relationship_to_remove[0]} -> {relationship_to_remove[1]}"):
-            st.session_state.relationships.remove(relationship_to_remove)
-            st.success(f"Removed relationship: {relationship_to_remove[0]} -> {relationship_to_remove[1]}")
+        st.write("Select Relationship to Remove:")
+        # Create a dropdown with all relationships formatted as "cause -> effect"
+        relationship_options = [f"{cause} -> {effect}" for cause, effect in st.session_state.relationships]
+        selected_relationship_str = st.selectbox("", relationship_options)
+        
+        # Extract cause and effect from the selected string
+        selected_cause, selected_effect = selected_relationship_str.split(" -> ")
+
+        if st.button(f"Remove {selected_cause} -> {selected_effect}"):
+            st.session_state.relationships.remove((selected_cause, selected_effect))
+            st.success(f"Removed relationship: {selected_cause} -> {selected_effect}")
 
     # Generate causal graph button
     if st.button("Generate Causal Graph"):
