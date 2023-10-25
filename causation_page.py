@@ -164,6 +164,10 @@ def display_causal_model_creation():
 
     if st.button("Create and Estimate Causal Model"):
         # Define Causal Model
+        # Sanitize the dot_representation
+        if dot_representation.endswith('"; }'):
+            dot_representation = dot_representation[:-4] + '}'
+
         try:
             model = CausalModel(
                 data=st.session_state.data,
