@@ -115,8 +115,9 @@ def display_relationships_definition():
         dot_representation = "digraph {\n"
         for relation in st.session_state.relationships:
             dot_representation += f'    "{relation[0]}" -> "{relation[1]}";\n'
-        dot_representation = dot_representation.rstrip()  # Remove trailing spaces or newlines
+        dot_representation = dot_representation.rstrip("; \n")  # Remove trailing spaces, newlines, or semicolons
         dot_representation += "\n}"  # Close the digraph with a newline and bracket
+
 
         # Debugging line to show the generated DOT representation
         st.write("Generated DOT representation:", dot_representation)
