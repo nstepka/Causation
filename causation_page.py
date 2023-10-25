@@ -37,95 +37,60 @@ import os
 from dowhy import CausalModel
 import re
 import graphviz
-
-
-
-def generate_dot_download_link(dot_representation, download_name="causal_graph.dot"):
-    """Generate a download link for the DOT representation."""
-    b64 = base64.b64encode(dot_representation.encode()).decode()
-    href = f'<a href="data:application/octet-stream;base64,{b64}" download="{download_name}">Download DOT File</a>'
-    return href
-
-
-def parse_dot_content(dot_content):
-    """Parse the DOT content to extract relationships."""
-    lines = dot_content.split('\n')
-    relationships = []
-    for line in lines:
-        line = line.strip()
-        if '->' in line:
-            cause, effect = line.split('->')
-            cause = cause.strip(' "')
-            effect = effect.strip(' ";')
-            relationships.append((cause, effect))
-    return relationships
+from graphviz import Digraph
 
 
 
 def display_relationships_definition():
-    """Sub-task for defining relationships and visualizing them as a causal graph."""
+    st.subheader("Define Causal Relationships")
     
-    st.subheader("Upload a DOT File (Optional)")
-    uploaded_file = st.file_uploader("Choose a DOT file", type=["dot"])
-    
-    if uploaded_file:
-        dot_content = uploaded_file.read().decode()
-        st.session_state.dot_representation = dot_content
-        st.success("DOT file uploaded successfully!")
-        uploaded_graph = graphviz.Source(dot_content)
-        st.graphviz_chart(uploaded_graph.source)
-        
-        # Parse the uploaded DOT content to get relationships
-        st.session_state.relationships = parse_dot_content(dot_content)
+    # Ensure data is uploaded
+    if 'data' not in st.session_state or st.session_state.data is None:
+        st.warning("Please upload data first.")
+        return
 
     columns = list(st.session_state.data.columns)
 
-    # Selectors for cause and effect
-    cause_column = st.selectbox("Select Cause Column", columns, key="cause_column")
-    effect_column = st.selectbox("Select Effect Column", columns, key="effect_column")
+    # Dropdowns to select cause and effect columns
+    cause_column = st.selectbox("Select Cause Column", columns)
+    effect_column = st.selectbox("Select Effect Column", columns)
 
-    # Button to add the relationship
+    # Add relationship button
     if st.button("Add Relationship"):
+        relationship = (cause_column, effect_column)
         if "relationships" not in st.session_state:
             st.session_state.relationships = []
-
-        # Add the relationship
-        st.session_state.relationships.append((cause_column, effect_column))
+        if relationship not in st.session_state.relationships:
+            st.session_state.relationships.append(relationship)
         st.success(f"Added relationship: {cause_column} -> {effect_column}")
 
-    # Display defined relationships
+    # Display existing relationships and allow removal
     if "relationships" in st.session_state and st.session_state.relationships:
-        st.subheader("Defined Relationships")
-        
-        # Multi-select widget for relationships
-        to_remove = st.multiselect(
-            "Select relationships to remove:",
-            ["{} -> {}".format(relation[0], relation[1]) for relation in st.session_state.relationships]
-        )
-        
-        # Button to remove selected relationships
-        if st.button("Remove Selected Relationships"):
-            for relation_str in to_remove:
-                cause, effect = relation_str.split(" -> ")
+        st.write("Defined Relationships:")
+        for idx, (cause, effect) in enumerate(st.session_state.relationships):
+            st.write(f"{cause} -> {effect}")
+            remove_button = st.button(f"Remove {cause} -> {effect}")
+            if remove_button:
                 st.session_state.relationships.remove((cause, effect))
-            st.success(f"Removed {len(to_remove)} relationships.")
+                st.success(f"Removed relationship: {cause} -> {effect}")
 
-    # Generate and display the causal graph
+    # Generate causal graph button
     if st.button("Generate Causal Graph"):
-        dot_representation = "digraph {\n"
-        for relation in st.session_state.relationships:
-            dot_representation += f'    "{relation[0]}" -> "{relation[1]}";\n'
-        dot_representation += "}"
+        if "relationships" not in st.session_state or not st.session_state.relationships:
+            st.warning("Please define at least one relationship before generating the graph.")
+        else:
+            # Generate graph using Graphviz
+            dot = Digraph()
+            for cause, effect in st.session_state.relationships:
+                dot.edge(cause, effect)
+            
+            # Convert dot to string and save in session state
+            st.session_state.dot_representation = dot.source
+            st.session_state.generated_graph = True
+            
+            # Display the graph
+            st.graphviz_chart(dot)
 
-        # Explicitly set it in the session state
-        st.session_state.dot_representation = dot_representation
-
-        graph = graphviz.Source(dot_representation)
-        st.graphviz_chart(graph.source)
-        st.session_state.generated_graph = True  # Mark that the graph has been generated
-
-        # Provide the download link for the DOT file
-        st.markdown(generate_dot_download_link(dot_representation), unsafe_allow_html=True)
 
 
 
@@ -273,4 +238,3 @@ def causality_page():
         display_causal_model_creation()
     elif task == "Run Refutation Tests":
         display_refutation_tests()
-
