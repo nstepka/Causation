@@ -166,7 +166,7 @@ def display_causal_model_creation():
             data=st.session_state.data,
             treatment=treatment,
             outcome=outcome,
-            graph=st.session_state.get("dot_representation", "")
+            graph=dot_representation
         )
         
         
