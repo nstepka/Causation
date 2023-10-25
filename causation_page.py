@@ -188,7 +188,7 @@ def display_causal_model_creation():
             )
         
         except ValueError as e:
-            st.error(st.session_state.get('dot_representation)
+            st.error(st.session_state.get('dot_representation))
             return
         # Identification
         identified_estimand = model.identify_effect(proceed_when_unidentifiable=True)
