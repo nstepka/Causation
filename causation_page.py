@@ -62,7 +62,6 @@ def generate_download_link(filename, content, download_text):
     href = f'<a href="data:application/octet-stream;base64,{b64}" download="{filename}">{download_text}</a>'
     return href
 
-
 def display_relationships_definition():
     st.subheader("Define Causal Relationships")
     
@@ -139,6 +138,7 @@ def display_relationships_definition():
             # Provide the download link
             download_link = generate_download_link("causal_graph.dot", dot_representation, "Download Causal Graph (.dot)")
             st.markdown(download_link, unsafe_allow_html=True)
+
 
 
 
