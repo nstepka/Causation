@@ -115,16 +115,11 @@ def display_relationships_definition():
         dot_representation = "digraph {\n"
         for relation in st.session_state.relationships:
             dot_representation += f'    "{relation[0]}" -> "{relation[1]}";\n'
-        dot_representation = dot_representation.rstrip("; \n")  # Remove trailing spaces, newlines, or semicolons
-        dot_representation += "\n}"  # Close the digraph with a newline and bracket
-
-
-        # Debugging line to show the generated DOT representation
-        st.write("Generated DOT representation:", dot_representation)
+        dot_representation += "}"
 
         # Explicitly set it in the session state
         st.session_state.dot_representation = dot_representation
-    
+
         graph = graphviz.Source(dot_representation)
         st.graphviz_chart(graph.source)
         st.session_state.generated_graph = True  # Mark that the graph has been generated
@@ -159,17 +154,15 @@ def display_causal_model_creation():
     The treatment variable is what you believe to be the cause in your causal relationship, 
     and the outcome variable is the effect you are studying.
     """)
-    st.write("Generated DOT representation:", dot_representation)     
+
     if st.button("Create and Estimate Causal Model"):
         # Define Causal Model
-
         model = CausalModel(
-        data=st.session_state.data,
-        treatment=treatment,
-        outcome=outcome,
-        graph="digraph { \"accommodates\" -> \"price\"; \"bedrooms\" -> \"accommodates\"; \"beds\" -> \"bedrooms\"; \"bathrooms\" -> \"bedrooms\"; \"bathrooms\" -> \"price\" }"
-
-
+            data=st.session_state.data,
+            treatment=treatment,
+            outcome=outcome,
+            graph=st.session_state.get("dot_representation", "")
+        )
         
         
         # Identification
@@ -280,5 +273,4 @@ def causality_page():
         display_causal_model_creation()
     elif task == "Run Refutation Tests":
         display_refutation_tests()
-
 
