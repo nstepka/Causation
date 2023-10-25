@@ -162,7 +162,7 @@ def display_causal_model_creation():
                 data=st.session_state.data,
                 treatment=treatment,
                 outcome=outcome,
-                graph="digraph { \"accommodates\" -> \"price\"; \"bedrooms\" -> \"accommodates\"; \"beds\" -> \"bedrooms\"; \"bathrooms\" -> \"bedrooms\"; \"bathrooms\" -> \"price\" }"
+                graph=st.session_state.get("dot_representation", "")
             )
         
         except ValueError as e:
