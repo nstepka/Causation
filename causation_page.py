@@ -85,7 +85,7 @@ def display_relationships_definition():
         st.write("Select Relationship to Remove:")
         # Create a dropdown with all relationships formatted as "cause -> effect"
         relationship_options = [f"{cause} -> {effect}" for cause, effect in st.session_state.relationships]
-        selected_relationship_str = st.selectbox("", relationship_options)
+        selected_relationship_str = st.selectbox("Select Relationship:", relationship_options)
         
         # Extract cause and effect from the selected string
         selected_cause, selected_effect = selected_relationship_str.split(" -> ")
@@ -109,6 +109,8 @@ def display_relationships_definition():
         for relationship in uploaded_relationships:
             if relationship not in st.session_state.relationships:
                 st.session_state.relationships.append(relationship)
+
+        st.success(f"Loaded {len(uploaded_relationships)} relationships from the provided .dot file.")
 
     # Generate causal graph button
     if st.button("Generate Causal Graph"):
@@ -134,10 +136,6 @@ def display_relationships_definition():
                 f.write(dot.source)
             
             st.markdown(generate_download_link(temp_filename, "Download causal graph (.dot)"), unsafe_allow_html=True)
-
-
-
-
 
 
 def display_causal_model_creation():
