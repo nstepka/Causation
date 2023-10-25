@@ -154,7 +154,7 @@ def display_causal_model_creation():
     The treatment variable is what you believe to be the cause in your causal relationship, 
     and the outcome variable is the effect you are studying.
     """)
-
+    st.write("Generated DOT representation:", dot_representation)     
     if st.button("Create and Estimate Causal Model"):
         # Define Causal Model
         model = CausalModel(
