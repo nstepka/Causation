@@ -163,10 +163,16 @@ def display_causal_model_creation():
     if st.button("Create and Estimate Causal Model"):
         # Define Causal Model
         model = CausalModel(
-            data=st.session_state.data,
-            treatment=treatment,
-            outcome=outcome,
-            graph="digraph { "accommodates" -> "price"; "bedrooms" -> "accommodates"; "beds" -> "bedrooms"; "bathrooms" -> "bedrooms"; "bathrooms" -> "price";}")
+                  data=st.session_state.data,
+                  treatment=treatment,
+                  outcome=outcome,
+                  graph="digraph { 
+                           "accommodates" -> "price";
+                            "bedrooms" -> "accommodates";
+                            "beds" -> "bedrooms";
+                            "bathrooms" -> "bedrooms";
+                            "bathrooms" -> "price";}"    
+
         
         
         # Identification
