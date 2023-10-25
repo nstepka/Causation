@@ -62,6 +62,7 @@ def generate_download_link(filename, content, download_text):
     href = f'<a href="data:application/octet-stream;base64,{b64}" download="{filename}">{download_text}</a>'
     return href
 
+
 def display_relationships_definition():
     st.subheader("Define Causal Relationships")
     
