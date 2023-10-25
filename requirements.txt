@@ -11,4 +11,3 @@ streamlit==1.23.1
 xgboost==1.6.2
 dowhy
 graphviz==0.20.1
-pygraphviz
