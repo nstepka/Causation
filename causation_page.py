@@ -126,6 +126,15 @@ def display_relationships_definition():
             
             # Display the graph
             st.graphviz_chart(dot)
+            
+            # Provide a download link for the graph
+            # Save the graph representation as a temporary .dot file
+            temp_filename = "/mnt/data/causal_graph.dot"
+            with open(temp_filename, "w") as f:
+                f.write(dot.source)
+            
+            st.markdown(generate_download_link(temp_filename, "Download causal graph (.dot)"), unsafe_allow_html=True)
+
 
 
 
