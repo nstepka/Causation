@@ -1,0 +1,7 @@
+digraph {
+    "accommodates" -> "price";
+    "bedrooms" -> "accommodates";
+    "beds" -> "bedrooms";
+    "bathrooms" -> "bedrooms";
+    "bathrooms" -> "price";
+}

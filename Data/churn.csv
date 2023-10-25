@@ -1,0 +1,11 @@
+customer_id,age,gender,income,contract_type,contract_length,monthly_charges,total_charges,churn
+1,22,Male,60000,Month-to-month,12,29.85,295.0,No
+2,55,Female,45000,One year,12,55.00,650.0,No
+3,35,Male,50000,Two year,24,56.65,1355.0,Yes
+4,21,Female,70000,Month-to-month,12,35.95,325.0,No
+5,72,Male,35000,Two year,24,29.75,710.0,No
+6,45,Female,65000,One year,12,72.95,870.0,No
+7,29,Male,40000,Month-to-month,12,29.85,300.0,Yes
+8,32,Female,55000,Two year,24,66.65,1625.0,No
+9,50,Male,75000,One year,12,99.95,1195.0,No
+10,32,Female,50000,Month-to-month,12,39.55,360.0,Yes
