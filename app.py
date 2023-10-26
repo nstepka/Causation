@@ -86,7 +86,7 @@ def main_updated():
     primary_task = st.sidebar.radio(
     "Choose a primary task:",
     ["Data Upload", "Feature Engineering", "Explore the Data", 
-     "Regression Analysis", "Causality Analysis", "Save"]
+     "Regression Analysis", "Extensive Data Analysis","Time Series Analysis","Causality Analysis", "Save"]
     )
 
     if primary_task == "Data Upload":
@@ -100,13 +100,16 @@ def main_updated():
 
     elif primary_task == "Regression Analysis":
         evaluate_model_page()
-    
-    elif primary_task == "Causality Analysis":
-        causality_page()
-    
+
+    elif primary_task == "Extensive Data Analysis":
+        advanced_data_analysis()
+    elif primary_task == "Time Series Analysis":
+        time_series_analysis()
+
     elif primary_task == "Save":
         save_data()
-    
+    elif primary_task == "Causality Analysis":
+        causality_page()
 
 
 
