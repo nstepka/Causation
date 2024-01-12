@@ -24,6 +24,14 @@ import base64
 
 
 def upload_data():
+
+
+    st.markdown("""    
+    ## About this App
+    This app is designed to assist users in quick modeling and provide insights into business data science projects. 
+    With a user-friendly interface, it facilitates various tasks from data upload to advanced analysis. 
+    I hope this tool proves beneficial for your data science endeavors!
+    """)
     
     st.markdown("""
     ## About the Author
@@ -35,12 +43,7 @@ def upload_data():
     
     [Connect with me on LinkedIn](https://www.linkedin.com/in/nstepka/)""")
 
-    st.markdown("""    
-    ## About this App
-    This app is designed to assist users in quick modeling and provide insights into business data science projects. 
-    With a user-friendly interface, it facilitates various tasks from data upload to advanced analysis. 
-    I hope this tool proves beneficial for your data science endeavors!
-    """)
+    
 
     # Step 1: Upload CSV
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
