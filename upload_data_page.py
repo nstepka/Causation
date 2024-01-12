@@ -27,9 +27,11 @@ def upload_data():
     
     st.markdown("""
     ## About the Author
-    Hello! I'm **Nicholas Stepka**, a Computer Data Scientist at Tennessee State University. 
-    Currently, I'm pursuing my degree in Computer Science with a concentration in data science. 
-    My research interests lie in causal inference and understanding tabular data to solve real-world problems.
+    Hello! I'm **Nicholas Stepka**, a recent graduate in Computer Science from Tennessee State University, where I specialized in Data Science. I hold a strong passion for leveraging data to drive business solutions and innovation. My academic journey and professional experience have fostered a deep interest in business intelligence, machine learning, and statistical modeling.
+
+    My expertise lies in analyzing and interpreting complex datasets to uncover actionable insights. Through my senior project, "Airbnb Rent Prediction Model Based on Large Data," I have developed a keen understanding of how machine learning algorithms can be applied to real-world scenarios, especially in predictive analytics.
+
+    I am enthusiastic about exploring the intersection of technology and business, particularly how data-driven strategies can optimize performance and drive growth. My goal is to utilize my skills in Python, machine learning, and statistical modeling to contribute to the field of business intelligence and data science, creating impactful solutions for challenging problems.
     
     [Connect with me on LinkedIn](https://www.linkedin.com/in/nstepka/)""")
 
