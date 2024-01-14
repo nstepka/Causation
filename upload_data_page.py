@@ -58,6 +58,8 @@ def upload_data():
     My expertise lies in analyzing and interpreting complex datasets to uncover actionable insights. Through my senior project, "Airbnb Rent Prediction Model Based on Large Data," I have developed a keen understanding of how machine learning algorithms can be applied to real-world scenarios, especially in predictive analytics.
 
     I am enthusiastic about exploring the intersection of technology and business, particularly how data-driven strategies can optimize performance and drive growth. My goal is to utilize my skills in Python, machine learning, and statistical modeling to contribute to the field of business intelligence and data science, creating impactful solutions for challenging problems.
+
+    Check out my first Tableau Dashboard I created on a cold Sunday morning! https://public.tableau.com/app/profile/nstepka/viz/AirbnbDataSet_17052522761620/Dashboard1
     
     [Connect with me on LinkedIn](https://www.linkedin.com/in/nstepka/)""")
 
