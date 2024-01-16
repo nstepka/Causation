@@ -52,6 +52,13 @@ def decision_tree_page():
 
             # Initialize the appropriate model
             if model_type == "Classifier":
+
+                st.write("""**Metrics Explanation:**
+            - **Accuracy**: The ratio of correctly predicted instances to the total instances. Gives a general idea of the model's performance.
+            - **Precision**: The ratio of correctly predicted positive observations to the total predicted positives. Measures a classifier's exactness.
+            - **Recall**: The ratio of correctly predicted positive observations to all the observations in the actual class. Measures a classifier's completeness.
+            - **F1 Score**: The weighted average of Precision and Recall. Tries to find the balance between precision and recall.
+            """)
                 model = DecisionTreeClassifier(max_depth=max_depth,
                                                min_samples_split=min_samples_split,
                                                min_samples_leaf=min_samples_leaf,
