@@ -1,3 +1,9 @@
+import streamlit as st
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor, plot_tree
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, mean_squared_error, r2_score
+import matplotlib.pyplot as plt
+
 def decision_tree_page():
     st.title("Decision Tree Analysis")
 
