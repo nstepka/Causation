@@ -22,30 +22,55 @@ def decision_tree_page():
             y = data[target]
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-            # Hyperparameters
+            # Model type selection
+            model_type = st
+            model_type = st.radio("Choose model type", ("Classifier", "Regressor"))
+
+            # Hyperparameters input
             max_depth = st.number_input('Max Depth', min_value=1, value=5, step=1)
             min_samples_split = st.number_input('Min Samples Split', min_value=2, value=2, step=1)
             min_samples_leaf = st.number_input('Min Samples Leaf', min_value=1, value=1, step=1)
             max_features = st.selectbox('Max Features', ['auto', 'sqrt', 'log2'])
 
-            # Training the Decision Tree
-            if st.button("Train Model"):
+            # Initialize the appropriate model
+            if model_type == "Classifier":
+                model = DecisionTreeClassifier(max_depth=max_depth,
+                                               min_samples_split=min_samples_split,
+                                               min_samples_leaf=min_samples_leaf,
+                                               max_features=max_features)
+            else:  # Regressor
                 model = DecisionTreeRegressor(max_depth=max_depth,
                                               min_samples_split=min_samples_split,
                                               min_samples_leaf=min_samples_leaf,
                                               max_features=max_features)
+
+            # Training the Decision Tree
+            if st.button("Train Model"):
                 model.fit(X_train, y_train)
 
                 # Model evaluation
                 predictions = model.predict(X_test)
-                st.write("Mean Squared Error:", mean_squared_error(y_test, predictions))
-                st.write("R^2 Score:", r2_score(y_test, predictions))
+                if model_type == "Classifier":
+                    accuracy = model.score(X_test, y_test)
+                    class_report = classification_report(y_test, predictions)
+                    st.write("Model Accuracy:", accuracy)
+                    st.text("Classification Report:")
+                    st.text(class_report)
+                else:  # Regressor
+                    mse = mean_squared_error(y_test, predictions)
+                    r2 = r2_score(y_test, predictions)
+                    st.write("Mean Squared Error:", mse)
+                    st.write("R^2 Score:", r2)
 
                 # Visualize the tree
                 fig, ax = plt.subplots(figsize=(12, 12))
-                plot_tree(model, filled=True, feature_names=features, ax=ax)
+                if model_type == "Classifier":
+                    plot_tree(model, filled=True, feature_names=features, class_names=str(y.unique()), ax=ax)
+                else:  # Regressor
+                    plot_tree(model, filled=True, feature_names=features, ax=ax)
                 st.pyplot(fig)
         else:
             st.warning("Please select at least one feature and a target.")
     else:
         st.warning("No data available. Please upload data first.")
+
