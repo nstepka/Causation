@@ -13,7 +13,7 @@ def decision_tree_page():
         st.write(data.head())
 
         # Select features and target
-        features = st.multiselect("Select features", data.columns.tolist(), default=data.columns[:-1])
+        features = st.multiselect("Select features", data.columns.tolist(), default=data.columns[:-1].tolist())
         target = st.selectbox("Select target", data.columns.tolist(), index=len(data.columns)-1)
 
         # Split data into training and test sets
