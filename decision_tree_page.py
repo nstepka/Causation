@@ -81,6 +81,11 @@ def decision_tree_page():
             - **Precision**: The ratio of correctly predicted positive observations to the total predicted positives. Measures a classifier's exactness.
             - **Recall**: The ratio of correctly predicted positive observations to all the observations in the actual class. Measures a classifier's completeness.
             - **F1 Score**: The weighted average of Precision and Recall. Tries to find the balance between precision and recall.
+            - **Macro Avg**: Arithmetic mean of the precision and recall for each class, without taking the class distribution into account. It treats all classes equally, no matter the sample size.
+            - **Weighted Avg**: Precision and recall for each class are weighted by the number of true instances for each class. This helps account for class imbalance; that is, when one class might have significantly more samples than the other.
+            - **Support**: The number of actual occurrences of the class in the specified dataset. For balanced datasets, it is the same for both classes.
+            
+            
             """)
                     st.text(class_report)
                 else:  # Regressor
