@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 import pandas as pd  # Import pandas for data manipulation
+import numpy as np
 
 def decision_tree_page():
     st.title("Decision Tree Analysis")
