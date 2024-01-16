@@ -72,7 +72,7 @@ def display_handle_missing_values():
     missing_columns = missing_data[missing_data > 0]
 
     if not missing_columns.empty:
-        st.markdown("""AA list of features and the number of missing features total.""")
+        st.markdown("""A list of features and the number of missing features total.""")
         missing_values_placeholder = st.empty()
         missing_values_placeholder.write("Columns with missing values:")
         missing_values_placeholder.write(missing_columns)
