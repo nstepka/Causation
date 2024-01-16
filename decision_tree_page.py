@@ -5,7 +5,7 @@ from sklearn.metrics import classification_report, mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 
 def decision_tree_page():
-    st.title("Decision Tree Analysis")
+    st.title("Decisioasfasn Tree Analysis")
 
     # Check if data is loaded
     if 'data' in st.session_state and st.session_state['data'] is not None:
