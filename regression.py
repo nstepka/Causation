@@ -172,9 +172,6 @@ def display_model_performance_comparison():
             st.write(f"Test/Train Split: {st.session_state.test_size*100:.0f}% Test - {100*(1-st.session_state.test_size):.0f}% Train")
 
         # Plot model performance without passing the task_type argument
-        st.write("Model Performance Comparison:")
-        st.pyplot(plot_model_performance(st.session_state.results_df))
-        
         if st.session_state.task_type == "classification":
             st.write("""
             **Metrics Explanation:**
@@ -183,6 +180,10 @@ def display_model_performance_comparison():
             - **Recall**: The ratio of correctly predicted positive observations to all the observations in the actual class. Measures a classifier's completeness.
             - **F1 Score**: The weighted average of Precision and Recall. Tries to find the balance between precision and recall.
             """)
+        st.write("Model Performance Comparison:")
+        st.pyplot(plot_model_performance(st.session_state.results_df))
+        
+        
     else:
         st.warning("Please select target, features and train the models first.")
 
