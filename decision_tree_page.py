@@ -90,25 +90,33 @@ def decision_tree_page():
             
             """)
                     st.text(class_report)
+               
                 if model_type == "Regressor":
+                    # Assuming X is one-dimensional
+                    X_reshaped = X[features[0]].values.reshape(-1, 1)  # Reshape if X is a Series
+                    X_train, X_test, y_train, y_test = train_test_split(X_reshaped, y, test_size=0.3, random_state=42)
+                    model.fit(X_train, y_train)
+                    predictions = model.predict(X_test)
+                    
                     # Calculate predictions for a range of x values to get the step function
-                    x_range = np.linspace(X.min(), X.max(), num=300)
+                    x_min, x_max = X[features[0]].min(), X[features[0]].max()
+                    x_range = np.linspace(x_min, x_max, 300).reshape(-1, 1)
                     y_pred_range = model.predict(x_range)
-
                     # Plot the actual vs predicted values as a step graph
                     fig, ax = plt.subplots(figsize=(12, 6))
-                    ax.scatter(X, y, color='blue', label='Actual', alpha=0.5)
-                    ax.step(x_range, y_pred_range, where='mid', color='red', label='Predicted')
-                    ax.set_xlabel('Features')
-                    ax.set_ylabel('Target')
+                    ax.scatter(X_test, y_test, color='blue', label='Actual', alpha=0.5)
+                    ax.plot(x_range, y_pred_range, color='red', label='Predicted')
+                    ax.set_xlabel(features[0])
+                    ax.set_ylabel(target)
                     ax.legend()
                     st.pyplot(fig)
-
                     # Model evaluation metrics
                     mse = mean_squared_error(y_test, predictions)
                     r2 = r2_score(y_test, predictions)
                     st.write("Mean Squared Error:", mse)
                     st.write("R^2 Score:", r2)
+
+                
 
                 # Visualize the tree
                 fig, ax = plt.subplots(figsize=(12, 12))
