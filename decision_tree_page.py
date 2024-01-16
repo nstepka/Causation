@@ -3,7 +3,6 @@ from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor, plot_tre
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, mean_squared_error, r2_score
 import matplotlib.pyplot as plt
-
 def decision_tree_page():
     st.title("Decision Tree Analysis")
 
@@ -25,22 +24,18 @@ def decision_tree_page():
             # Model type selection
             model_type = st.radio("Choose model type", ("Classifier", "Regressor"))
 
-            # Ask user if they want to set hyperparameters
+            # Hyperparameters input
             set_hyperparameters = st.checkbox("Set hyperparameters", value=False)
+            max_depth = None
+            min_samples_split = 2
+            min_samples_leaf = 1
+            max_features = None
 
-            # Hyperparameters input (only show when the user wants to set them)
             if set_hyperparameters:
                 max_depth = st.number_input('Max Depth', min_value=1, value=5, step=1)
                 min_samples_split = st.number_input('Min Samples Split', min_value=2, value=2, step=1)
                 min_samples_leaf = st.number_input('Min Samples Leaf', min_value=1, value=1, step=1)
                 max_features = st.selectbox('Max Features', ['auto', 'sqrt', 'log2'])
-            else:
-                # Default hyperparameters for scikit-learn Decision Trees
-                max_depth = None
-                min_samples_split
-                min_samples_split = 2
-                min_samples_leaf = 1
-                max_features = None  # "None" means max_features=n_features
 
             # Initialize the appropriate model
             if model_type == "Classifier":
@@ -49,6 +44,9 @@ def decision_tree_page():
                                                min_samples_leaf=min_samples_leaf,
                                                max_features=max_features)
             else:  # Regressor
+                model = DecisionTreeRegressor(max
+
+
                 model = DecisionTreeRegressor(max_depth=max_depth,
                                               min_samples_split=min_samples_split,
                                               min_samples_leaf=min_samples_leaf,
