@@ -89,7 +89,21 @@ def decision_tree_page():
             
             """)
                     st.text(class_report)
-                else:  # Regressor
+                if model_type == "Regressor":
+                    # Calculate predictions for a range of x values to get the step function
+                    x_range = np.linspace(X.min(), X.max(), num=300)
+                    y_pred_range = model.predict(x_range)
+
+                    # Plot the actual vs predicted values as a step graph
+                    fig, ax = plt.subplots(figsize=(12, 6))
+                    ax.scatter(X, y, color='blue', label='Actual', alpha=0.5)
+                    ax.step(x_range, y_pred_range, where='mid', color='red', label='Predicted')
+                    ax.set_xlabel('Features')
+                    ax.set_ylabel('Target')
+                    ax.legend()
+                    st.pyplot(fig)
+
+                    # Model evaluation metrics
                     mse = mean_squared_error(y_test, predictions)
                     r2 = r2_score(y_test, predictions)
                     st.write("Mean Squared Error:", mse)
