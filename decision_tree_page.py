@@ -16,7 +16,7 @@ def decision_tree_page():
             st.warning("⚠️ The dataset contains non-numerical features. Please visit the Feature Engineering section for proper encoding.")
             return  # Stop execution if non-numerical features are present
 
-    st.write(data.head())
+        st.write(data.head())
         st.write(data.head())
 
         # Select features and target
