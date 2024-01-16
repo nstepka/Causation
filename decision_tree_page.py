@@ -11,8 +11,15 @@ def decision_tree_page():
     # Check if data is loaded
     if 'data' in st.session_state and st.session_state['data'] is not None:
         data = st.session_state['data']
+        st.write(data.head())
+
+        # Select features and target
+        features = st.multiselect("Select features", data.columns.tolist(), default=data.columns[:-1].tolist())
+        target = st.selectbox("Select target", data.columns.tolist(), index=len(data.columns)-1)
+
+    
         # Check for numerical data
-        if not pd.api.types.is_numeric_dtype(data.drop('target', axis=1)).all():
+        if not all(pd.api.types.is_numeric_dtype(data[col]) for col in data.columns if col != target):
             st.warning("⚠️ The dataset contains non-numerical features. Please visit the Feature Engineering section for proper encoding.")
             return  # Stop execution if non-numerical features are present
 
