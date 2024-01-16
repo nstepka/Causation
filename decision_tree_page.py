@@ -44,9 +44,6 @@ def decision_tree_page():
                                                min_samples_leaf=min_samples_leaf,
                                                max_features=max_features)
             else:  # Regressor
-                model = DecisionTreeRegressor(max
-
-
                 model = DecisionTreeRegressor(max_depth=max_depth,
                                               min_samples_split=min_samples_split,
                                               min_samples_leaf=min_samples_leaf,
