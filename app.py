@@ -8,6 +8,7 @@ from regression import display_correlation_heatmap, evaluate_model_page
 from advance_data_analysis import advanced_data_analysis, perform_classification, perform_clustering, perform_dimensionality_reduction
 from time_series_analysis import time_series_analysis, visualize_time_series_data,display_acf_pacf, fit_arima_model
 from causation_page import causality_page
+from decision_tree_page import decision_tree_page
 
 import streamlit as st
 import pandas as pd
@@ -110,6 +111,9 @@ def main_updated():
         save_data()
     elif primary_task == "Causality Analysis":
         causality_page()
+   
+    elif primary_task == "Decision Tree Analysis":
+        decision_tree_page()
 
 
 
