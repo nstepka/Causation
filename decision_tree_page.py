@@ -3,12 +3,20 @@ from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor, plot_tre
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, mean_squared_error, r2_score
 import matplotlib.pyplot as plt
+import pandas as pd  # Import pandas for data manipulation
+
 def decision_tree_page():
     st.title("Decision Tree Analysis")
 
     # Check if data is loaded
     if 'data' in st.session_state and st.session_state['data'] is not None:
         data = st.session_state['data']
+        # Check for numerical data
+        if not pd.api.types.is_numeric_dtype(data.drop('target', axis=1)).all():
+            st.warning("⚠️ The dataset contains non-numerical features. Please visit the Feature Engineering section for proper encoding.")
+            return  # Stop execution if non-numerical features are present
+
+    st.write(data.head())
         st.write(data.head())
 
         # Select features and target
