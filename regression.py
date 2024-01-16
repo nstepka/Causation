@@ -353,27 +353,32 @@ def display_feature_importance():
         st.warning("Please train the models first.")
         return
 
-    model_name = st.selectbox("Select a model to view feature importance", list(st.session_state.trained_models.keys()))
-    model = st.session_state.trained_models[model_name]
-    
-    if hasattr(model, "feature_importances_"):
-        importances = model.feature_importances_
+    # Filter models to include only those with feature importance
+    compatible_models = {name: model for name, model in st.session_state.trained_models.items() if hasattr(model, "feature_importances_")}
 
-        # Ensure feature_names matches the features used in the trained model
-        if hasattr(st.session_state.X_train, 'columns'):  # if X_train is a DataFrame
-            feature_names = st.session_state.X_train.columns
-        else:  # if X_train is a numpy array, fallback to the session state (might be unsafe)
-            feature_names = st.session_state.selected_features_grid
+    if not compatible_models:
+        st.warning("No trained models with feature importance available.")
+        return
 
-        feature_importances = pd.Series(importances, index=feature_names).sort_values(ascending=False)
-    
-        # Convert the sorted Series to a DataFrame for display in Streamlit
-        feature_importances_df = feature_importances.reset_index()
-        feature_importances_df.columns = ['Feature', 'Importance']
+    model_name = st.selectbox("Select a model to view feature importance", list(compatible_models.keys()))
+    model = compatible_models[model_name]
 
-        st.bar_chart(feature_importances_df.set_index('Feature'))
+    importances = model.feature_importances_
+
+    # Ensure feature_names matches the features used in the trained model
+    if hasattr(st.session_state.X_train, 'columns'):
+        feature_names = st.session_state.X_train.columns
     else:
-        st.warning(f"The selected model ({model_name}) does not provide feature importance.")
+        feature_names = st.session_state.selected_features_grid
+
+    feature_importances = pd.Series(importances, index=feature_names).sort_values(ascending=False)
+    
+    # Convert the sorted Series to a DataFrame for display in Streamlit
+    feature_importances_df = feature_importances.reset_index()
+    feature_importances_df.columns = ['Feature', 'Importance']
+
+    st.bar_chart(feature_importances_df.set_index('Feature'))
+
 
 
 def display_prediction_vs_actual():
