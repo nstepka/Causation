@@ -77,6 +77,7 @@ def decision_tree_page():
                     st.text("Classification Report:")
                     st.write("""
             **Metrics Explanation:**
+            - **Precision: The ratio of correctly predicted positive observations to the total predicted positive observations. High precision relates to a low false positive rate. It is a measure of a classifier's exactness. Precision is:
             - **Accuracy**: The ratio of correctly predicted instances to the total instances. Gives a general idea of the model's performance.
             - **Precision**: The ratio of correctly predicted positive observations to the total predicted positives. Measures a classifier's exactness.
             - **Recall**: The ratio of correctly predicted positive observations to all the observations in the actual class. Measures a classifier's completeness.
