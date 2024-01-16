@@ -53,7 +53,8 @@ def decision_tree_page():
             # Initialize the appropriate model
             if model_type == "Classifier":
 
-                st.write("""**Metrics Explanation:**
+                st.write("""
+            **Metrics Explanation:**
             - **Accuracy**: The ratio of correctly predicted instances to the total instances. Gives a general idea of the model's performance.
             - **Precision**: The ratio of correctly predicted positive observations to the total predicted positives. Measures a classifier's exactness.
             - **Recall**: The ratio of correctly predicted positive observations to all the observations in the actual class. Measures a classifier's completeness.
