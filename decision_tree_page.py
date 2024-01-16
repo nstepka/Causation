@@ -23,14 +23,24 @@ def decision_tree_page():
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
             # Model type selection
-            model_type = st
             model_type = st.radio("Choose model type", ("Classifier", "Regressor"))
 
-            # Hyperparameters input
-            max_depth = st.number_input('Max Depth', min_value=1, value=5, step=1)
-            min_samples_split = st.number_input('Min Samples Split', min_value=2, value=2, step=1)
-            min_samples_leaf = st.number_input('Min Samples Leaf', min_value=1, value=1, step=1)
-            max_features = st.selectbox('Max Features', ['auto', 'sqrt', 'log2'])
+            # Ask user if they want to set hyperparameters
+            set_hyperparameters = st.checkbox("Set hyperparameters", value=False)
+
+            # Hyperparameters input (only show when the user wants to set them)
+            if set_hyperparameters:
+                max_depth = st.number_input('Max Depth', min_value=1, value=5, step=1)
+                min_samples_split = st.number_input('Min Samples Split', min_value=2, value=2, step=1)
+                min_samples_leaf = st.number_input('Min Samples Leaf', min_value=1, value=1, step=1)
+                max_features = st.selectbox('Max Features', ['auto', 'sqrt', 'log2'])
+            else:
+                # Default hyperparameters for scikit-learn Decision Trees
+                max_depth = None
+                min_samples_split
+                min_samples_split = 2
+                min_samples_leaf = 1
+                max_features = None  # "None" means max_features=n_features
 
             # Initialize the appropriate model
             if model_type == "Classifier":
@@ -73,4 +83,3 @@ def decision_tree_page():
             st.warning("Please select at least one feature and a target.")
     else:
         st.warning("No data available. Please upload data first.")
-
