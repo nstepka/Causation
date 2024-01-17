@@ -90,7 +90,7 @@ This section provides an in-depth analysis using Decision Trees, which can be us
 - **Model Evaluation**: After training the model, you can assess its accuracy and generate a classification report. The classification report includes important metrics such as precision, recall, F1-score, and more to evaluate the classifier's performance.
 
 - **Visualizations**: Visualize the Decision Tree structure to understand how the model makes decisions. This visualization can help you interpret the model's behavior and identify important features.
--** use DTClassiferWillBuy.csv, you will have to one hot encode.**
+- **Use DTClassiferWillBuy.csv; you will have to one hot encode.**
 
 ### Regressor - 
 
