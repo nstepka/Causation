@@ -81,7 +81,7 @@ This project is an interactive web application built using Streamlit, designed f
 
 This section provides an in-depth analysis using Decision Trees, which can be used for both classification and regression tasks. Decision Trees are versatile and interpretable machine learning models that are particularly useful for understanding the decision-making process of the model.
 
-### Classifier - DTClassiferWillBuy.csv
+### Classifier - 
 
 - **Data**: To perform classification analysis, you can use the provided dataset DTClassiferWillBuy.csv. This dataset is suitable for predicting whether customers will make a purchase based on various features.
 
@@ -90,9 +90,9 @@ This section provides an in-depth analysis using Decision Trees, which can be us
 - **Model Evaluation**: After training the model, you can assess its accuracy and generate a classification report. The classification report includes important metrics such as precision, recall, F1-score, and more to evaluate the classifier's performance.
 
 - **Visualizations**: Visualize the Decision Tree structure to understand how the model makes decisions. This visualization can help you interpret the model's behavior and identify important features.
--** use DTClassiferWillBuy.csv, you will have to one hot encode.
+-** use DTClassiferWillBuy.csv, you will have to one hot encode.**
 
-### Regressor - DTRegressionLoan.csv
+### Regressor - 
 
 - **Data**: For regression analysis, you can use the dataset DTRegressionLoan.csv. This dataset is suitable for predicting numerical values, such as loan amounts or prices, based on selected features.
 
@@ -101,7 +101,7 @@ This section provides an in-depth analysis using Decision Trees, which can be us
 - **Model Evaluation**: Evaluate the regressor's performance by calculating metrics like Mean Squared Error (MSE) and R-squared (R²) score. These metrics help measure how well the model predicts numerical outcomes.
 
 - **Visualizations**: Visualize the Decision Tree structure for regression to gain insights into how the model splits and predicts values. This visualization can aid in understanding the model's decision-making process.
-  ** use DTRegressionLoan.csv, check features for one hot encoding.
+- **Use DTRegressionLoan.csv, check features for one hot encoding.**
 
 Feel free to explore the Decision Tree Analysis section using the provided datasets. You can train, evaluate, and visualize Decision Trees for both classification and regression tasks, gaining valuable insights into your data.
 
