@@ -77,5 +77,34 @@ This project is an interactive web application built using Streamlit, designed f
 
 -**Works out of the box if you bring in df_selcted1.csv and bring in causal_graph_complete.dot in the causal graph section.  Target price as the outcome and accommodates as the treatment**
 
+## Decision Tree Analysis
+
+This section provides an in-depth analysis using Decision Trees, which can be used for both classification and regression tasks. Decision Trees are versatile and interpretable machine learning models that are particularly useful for understanding the decision-making process of the model.
+
+### Classifier - DTClassiferWillBuy.csv
+
+- **Data**: To perform classification analysis, you can use the provided dataset DTClassiferWillBuy.csv. This dataset is suitable for predicting whether customers will make a purchase based on various features.
+
+- **Model Training**: Choose features and the target variable from the dataset. You can customize the hyperparameters for the Decision Tree Classifier, such as max depth, min samples split, min samples leaf, and max features. These parameters allow you to fine-tune the model's performance.
+
+- **Model Evaluation**: After training the model, you can assess its accuracy and generate a classification report. The classification report includes important metrics such as precision, recall, F1-score, and more to evaluate the classifier's performance.
+
+- **Visualizations**: Visualize the Decision Tree structure to understand how the model makes decisions. This visualization can help you interpret the model's behavior and identify important features.
+-** use DTClassiferWillBuy.csv, you will have to one hot encode.
+
+### Regressor - DTRegressionLoan.csv
+
+- **Data**: For regression analysis, you can use the dataset DTRegressionLoan.csv. This dataset is suitable for predicting numerical values, such as loan amounts or prices, based on selected features.
+
+- **Model Training**: Similar to the classifier, select features and the target variable. Adjust hyperparameters like max depth, min samples split, min samples leaf, and max features for the Decision Tree Regressor to fit your specific regression task.
+
+- **Model Evaluation**: Evaluate the regressor's performance by calculating metrics like Mean Squared Error (MSE) and R-squared (R²) score. These metrics help measure how well the model predicts numerical outcomes.
+
+- **Visualizations**: Visualize the Decision Tree structure for regression to gain insights into how the model splits and predicts values. This visualization can aid in understanding the model's decision-making process.
+  ** use DTRegressionLoan.csv, check features for one hot encoding.
+
+Feel free to explore the Decision Tree Analysis section using the provided datasets. You can train, evaluate, and visualize Decision Trees for both classification and regression tasks, gaining valuable insights into your data.
+
+
 ### Save your model
 - **Model Saving**:  After all your hard work of feature engineering exploring the data and the models you can save your current csv file.
