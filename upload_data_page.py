@@ -34,7 +34,7 @@ def upload_data():
 
     If you want to look at this app's code or see the datasets it works with out of the box, go to my GitHub page for this app.
     
-    [Review this code for this app](https://github.com/nstepka/Causation)"""
+    [Review this code for this app](https://github.com/nstepka/Causation)
     """)
 
 
