@@ -32,9 +32,9 @@ def upload_data():
     With a user-friendly interface, it facilitates various tasks from data upload to advanced analysis. 
     I hope this tool proves beneficial for your data science endeavors!
 
-    If you want to look at this app's code or see the datasets it works with out of the box, go to my GitHub page for this app.
+    If you want to look at this app's code or see the datasets it works with out of the box,click the link below
     
-    [Review this code for this app](https://github.com/nstepka/Causation)
+    [App github page](https://github.com/nstepka/Causation)
     """)
 
 
