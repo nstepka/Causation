@@ -61,6 +61,7 @@ def upload_data():
 
     Check out my first Tableau Dashboard I created on a cold Sunday morning! https://public.tableau.com/app/profile/nstepka/viz/AirbnbDataSet_17052522761620/Dashboard1
     
-    [Connect with me on LinkedIn](https://www.linkedin.com/in/nstepka/)""")
+    [Connect with me on LinkedIn](https://www.linkedin.com/in/nstepka/)
+    [Review this code for this app](https://github.com/nstepka/Causation)""")
 
     
