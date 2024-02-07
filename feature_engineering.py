@@ -284,16 +284,21 @@ def display_encode_categorical():
     if not categorical_cols:
         st.warning("No categorical columns found in the dataset!")
         return
-    
+
     column_to_encode = st.selectbox("Select a column to encode:", categorical_cols)
-    
+
+    # Check if the selected column has missing values
+    if st.session_state.data[column_to_encode].isnull().any():
+        st.error(f"The column '{column_to_encode}' contains missing values. Please handle missing values before encoding.")
+        return  # Exit the function to prevent further execution until missing values are handled
+
     # Display a preview of the selected column
     st.write(f"Preview of {column_to_encode}:")
     st.write(st.session_state.data[column_to_encode].head())
 
     # Allow user to choose encoding method
     encoding_method = st.selectbox("Choose an encoding method:", ["One-Hot Encoding", "Label Encoding"])
-    
+
     if st.button("Encode"):
         if encoding_method == "One-Hot Encoding":
             # Split the comma-separated values to get a list of amenities
@@ -301,20 +306,21 @@ def display_encode_categorical():
 
             # Use pd.get_dummies on these lists to one-hot encode the data
             dummies = pd.get_dummies(split_data.apply(pd.Series).stack()).sum(level=0)
-            
+
             # Join the one-hot encoded columns to the original dataframe and drop the original column
             st.session_state.data = pd.concat([st.session_state.data, dummies], axis=1)
             st.session_state.data.drop(columns=[column_to_encode], inplace=True)
             st.success(f"{column_to_encode} encoded using One-Hot Encoding!")
-            
+
         elif encoding_method == "Label Encoding":
             # Label encode the selected column
             le = LabelEncoder()
             st.session_state.data[column_to_encode] = le.fit_transform(st.session_state.data[column_to_encode])
             st.success(f"{column_to_encode} encoded using Label Encoding!")
-        
+
         # Refresh the app state
-        st.experimental_rerun()    
+        st.experimental_rerun()
+
 
 def display_time_series_features():
     st.write("Time Series Feature Engineering")
