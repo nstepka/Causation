@@ -66,7 +66,7 @@ To see the app running visit https://causation.streamlit.app/
 
 - **This was designed to bring in the hello world of data, the iris data set.  For out-of-the-box use, use iris.csv**
 
-### Time Serires ARIMA Analysis
+### Time Series ARIMA Analysis
 
 - **Time Series Analysis with ARIMA**: Conduct time series analysis, including ACF and PACF plots, ARIMA model fitting, model diagnostics, forecasting, and model evaluation.
 - **Works well with the ParkData_5years.csv file.**
