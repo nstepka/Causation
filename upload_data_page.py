@@ -32,9 +32,9 @@ def upload_data():
     With a user-friendly interface, it facilitates various tasks from data upload to advanced analysis.
     I hope this tool proves beneficial for your data science endeavors!
 
-    If you want to look at this app's code or see the datasets it works with out of the box, click the link below
+  
 
-    [App github page](https://github.com/nstepka/Causation)
+    
     """)
 
     # Dataset options for dropdown
@@ -82,4 +82,5 @@ def upload_data():
     ## About the Author
     Hello! I'm **Nicholas Stepka**, a recent graduate in Computer Science from Tennessee State University, where I specialized in Data Science. ...
     [Connect with me on LinkedIn](https://www.linkedin.com/in/nstepka/)
+    [App github page](https://github.com/nstepka/Causation)
     """)
