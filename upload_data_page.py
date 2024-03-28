@@ -82,5 +82,8 @@ def upload_data():
     ## About the Author
     Hello! I'm **Nicholas Stepka**, a recent graduate in Computer Science from Tennessee State University, where I specialized in Data Science. ...
     [Connect with me on LinkedIn](https://www.linkedin.com/in/nstepka/)
+    """)
+
+    st.markdown("""
     [App github page](https://github.com/nstepka/Causation)
     """)
