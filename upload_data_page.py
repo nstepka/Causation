@@ -23,42 +23,50 @@ import seaborn as sns
 import base64
 
 
+import streamlit as st
+import pandas as pd
+
 def upload_data():
-    st.markdown("""    
+    st.markdown("""
     ## About this App
-    This app is designed to assist users in quick modeling and provide insights into business data science projects. 
-    With a user-friendly interface, it facilitates various tasks from data upload to advanced analysis. 
+    This app is designed to assist users in quick modeling and provide insights into business data science projects.
+    With a user-friendly interface, it facilitates various tasks from data upload to advanced analysis.
     I hope this tool proves beneficial for your data science endeavors!
 
     If you want to look at this app's code or see the datasets it works with out of the box, click the link below
-    
+
     [App github page](https://github.com/nstepka/Causation)
     """)
 
-    # Load IRIS dataset button
-    if st.button('Load IRIS Dataset'):
-        st.session_state.data = pd.read_csv('Data/IRIS.csv') # Adjust path if necessary
-        st.write("IRIS dataset loaded:")
-        st.write(st.session_state.data.head())
+    # Button to load specific datasets
+    datasets = {
+        'Load IRIS Dataset (Clustering & Feature Selection)': 'Data/IRIS.csv',
+        'Load Churn Dataset (Classification Analysis)': 'Data/churn.csv',
+        'Load Decision Tree Classifier Dataset (Will Buy)': 'Data/DTClassiferWillBuy.csv',
+        'Load Decision Tree Regression Dataset (Loan Amount)': 'Data/DTRegressionLoan.csv',
+        'Load Park Data (Time Series ARIMA Analysis)': 'Data/ParkData_5years.csv',
+        'Load Airbnb Dataset (Price Regression & Data Exploration)': 'Data/df_selected1.csv',
+        'Load Uncleaned Airbnb File (Data Cleaning & Exploration)': 'Data/df_selected1.csv'  # Assuming this is intentional duplicate for illustration
+    }
 
-    # Load churn dataset button
-    if st.button('Load Churn Dataset'):
-        st.session_state.data = pd.read_csv('Data/churn.csv') # Adjust path if necessary
-        st.write("Churn dataset loaded:")
-        st.write(st.session_state.data.head())
-
-    # Step 1: Upload CSV
-    uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
-    
-    if uploaded_file:
-        st.session_state.data = pd.read_csv(uploaded_file)
-        st.write("Uploaded data preview:")
-        st.write(st.session_state.data.head())
+    for button_label, file_path in datasets.items():
+        if st.button(button_label):
+            st.session_state.data = pd.read_csv(file_path)
+            st.write(f"{button_label.split('(')[0].strip()} loaded:")
+            st.write(st.session_state.data.head())
 
     # Option to clear the preloaded or uploaded file
     if st.button('Clear Data'):
         st.session_state.data = None
         st.write("Data cleared. You can now upload your own dataset or load one of the default datasets.")
+
+    # Step 1: Upload CSV
+    uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+
+    if uploaded_file:
+        st.session_state.data = pd.read_csv(uploaded_file)
+        st.write("Uploaded data preview:")
+        st.write(st.session_state.data.head())
 
     # Provide a button for users to download the dataframe
     if 'data' in st.session_state and st.session_state.data is not None:
@@ -69,12 +77,7 @@ def upload_data():
     # About the author section remains unchanged
     st.markdown("""
     ## About the Author
-    Hello! I'm **Nicholas Stepka**, a recent graduate in Computer Science from Tennessee State University, where I specialized in Data Science. I hold a strong passion for leveraging data to drive business solutions and innovation. My academic journey and professional experience have fostered a deep interest in business intelligence, machine learning, and statistical modeling.
+    Hello! I'm **Nicholas Stepka**, a recent graduate in Computer Science from Tennessee State University, where I specialized in Data Science. ...
+    [Connect with me on LinkedIn](https://www.linkedin.com/in/nstepka/)
+    """)
 
-    My expertise lies in analyzing and interpreting complex datasets to uncover actionable insights. Through my senior project, "Airbnb Rent Prediction Model Based on Large Data," I have developed a keen understanding of how machine learning algorithms can be applied to real-world scenarios, especially in predictive analytics.
-
-    I am enthusiastic about exploring the intersection of technology and business, particularly how data-driven strategies can optimize performance and drive growth. My goal is to utilize my skills in Python, machine learning, and statistical modeling to contribute to the field of business intelligence and data science, creating impactful solutions for challenging problems.
-
-    Check out my first Tableau Dashboard I created on a cold Sunday morning! https://public.tableau.com/app/profile/nstepka/viz/AirbnbDataSet_17052522761620/Dashboard1
-    
-    [Connect with me on LinkedIn](https://www.linkedin.com/in/nstepka/)""")
