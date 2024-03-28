@@ -28,23 +28,11 @@ import base64
 def upload_data():
     st.markdown("""
     ## About this App
-    Welcome to the Data Insight & Modeling Assistant
+    ## Welcome to the Data Insight & Modeling Assistant
     This dynamic application serves as your companion in the realm of data science and business analytics. Crafted with simplicity and efficiency in mind, it aims to bridge the gap between raw data and actionable insights. Whether you're a seasoned data scientist, a business analyst seeking to uncover trends, or a student diving into the world of data, this tool is designed to cater to your needs.
 
-    ##Key Features:
-    Versatile Data Upload Options: Start your analysis swiftly by loading one of the pre-defined datasets, or upload your own CSV file. Our library includes datasets for clustering, classification, regression, time series analysis, and more.
-    
-    Preprocessing & Feature Engineering: Prepare your data for analysis with user-friendly options for handling missing values, transforming data types, encoding categorical variables, and custom feature engineering.
-    
-    Exploratory Data Analysis: Dive into your data with interactive visualizations, including boxplots, scatter plots, and heatmaps, to uncover patterns and relationships.
-    
-    Model Training & Evaluation: Build and compare models with support for multiple regression and classification algorithms. Evaluate model performance using key metrics and visualize feature importance.
-    
-    Time Series Analysis: Utilize ARIMA modeling for time series forecasting, complete with diagnostics and forecasting evaluation.
-    
-    Decision Tree Analysis: Understand your data through decision trees, offering insights for both classification and regression tasks, complete with visual decision paths.
-    
-    Designed for Ease and Insight:
+
+    ##Designed for Ease and Insight:
     
     Our goal is to make data analysis accessible and insightful. With a focus on user experience, this app guides you through each step of the data science process, from initial data upload to deep analysis. Whether your project is aimed at predicting trends, classifying outcomes, or simply exploring data, our platform is equipped to provide the insights you need.
 
