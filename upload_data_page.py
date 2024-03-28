@@ -41,6 +41,9 @@ def upload_data():
 
     
     """)
+    st.markdown("""
+    [App github page](https://github.com/nstepka/Causation)
+    """)
 
     # Dataset options for dropdown
     dataset_options = {
@@ -94,6 +97,4 @@ def upload_data():
     
     [Connect with me on LinkedIn](https://www.linkedin.com/in/nstepka/)""")
 
-    st.markdown("""
-    [App github page](https://github.com/nstepka/Causation)
-    """)
+    
