@@ -23,7 +23,6 @@ import seaborn as sns
 import base64
 
 
-
 def upload_data():
     st.markdown("""    
     ## About this App
@@ -36,16 +35,17 @@ def upload_data():
     [App github page](https://github.com/nstepka/Causation)
     """)
 
-    # Check if data is already loaded, if not load the default Iris dataset
-    if 'data' not in st.session_state or st.session_state.data is None:
+    # Load IRIS dataset button
+    if st.button('Load IRIS Dataset'):
         st.session_state.data = pd.read_csv('Data/IRIS.csv') # Adjust path if necessary
-        st.write("Iris dataset loaded as default:")
+        st.write("IRIS dataset loaded:")
         st.write(st.session_state.data.head())
 
-    # Option to clear the preloaded file
-    if st.button('Clear Data'):
-        st.session_state.data = None
-        st.write("Data cleared. You can now upload your own dataset.")
+    # Load churn dataset button
+    if st.button('Load Churn Dataset'):
+        st.session_state.data = pd.read_csv('Data/churn.csv') # Adjust path if necessary
+        st.write("Churn dataset loaded:")
+        st.write(st.session_state.data.head())
 
     # Step 1: Upload CSV
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
@@ -55,7 +55,13 @@ def upload_data():
         st.write("Uploaded data preview:")
         st.write(st.session_state.data.head())
 
-        # Provide a button for users to download the dataframe
+    # Option to clear the preloaded or uploaded file
+    if st.button('Clear Data'):
+        st.session_state.data = None
+        st.write("Data cleared. You can now upload your own dataset or load one of the default datasets.")
+
+    # Provide a button for users to download the dataframe
+    if 'data' in st.session_state and st.session_state.data is not None:
         if st.button('Download Dataframe as CSV'):
             tmp_download_link = download_link(st.session_state.data, 'your_data.csv', 'Click here to download the data!')
             st.markdown(tmp_download_link, unsafe_allow_html=True)
@@ -72,5 +78,3 @@ def upload_data():
     Check out my first Tableau Dashboard I created on a cold Sunday morning! https://public.tableau.com/app/profile/nstepka/viz/AirbnbDataSet_17052522761620/Dashboard1
     
     [Connect with me on LinkedIn](https://www.linkedin.com/in/nstepka/)""")
-
-    
