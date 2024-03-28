@@ -79,7 +79,6 @@ def save_data():
         
 
 def main_updated():
-    st.title("Interactive Model Builder")
     
     
 
