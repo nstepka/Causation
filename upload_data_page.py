@@ -54,7 +54,7 @@ def upload_data():
         'Decision Tree Regression Dataset (Loan Amount)': 'Data/DTRegressionLoan.csv',
         'Park Data (Time Series ARIMA Analysis)': 'Data/ParkData_5years.csv',
         'Airbnb Dataset (Price Regression & Causality)': 'Data/df_selected1.csv',
-        'Uncleaned Airbnb File (Data Cleaning & Exploration)': 'Data/df_selected1.csv'
+        'Uncleaned Airbnb File (Data Cleaning & Exploration)': 'Data/listing.csv'
     }
 
     # Dropdown for dataset selection
