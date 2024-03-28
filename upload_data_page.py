@@ -31,7 +31,7 @@ def upload_data():
     This dynamic application serves as your companion in the realm of data science and business analytics. Crafted with simplicity and efficiency in mind, it aims to bridge the gap between raw data and actionable insights. Whether you're a seasoned data scientist, a business analyst seeking to uncover trends, or a student diving into the world of data, this tool is designed to cater to your needs.
 
 
-    ##Designed for Ease and Insight:
+    # Designed for Ease and Insight:
     
     Our goal is to make data analysis accessible and insightful. With a focus on user experience, this app guides you through each step of the data science process, from initial data upload to deep analysis. Whether your project is aimed at predicting trends, classifying outcomes, or simply exploring data, our platform is equipped to provide the insights you need.
 
