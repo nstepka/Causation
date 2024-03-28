@@ -27,8 +27,7 @@ import base64
 
 def upload_data():
     st.markdown("""
-    ## About this App
-    ## Welcome to the Data Insight & Modeling Assistant
+    ## Data Insight & Modeling Assistant:
     This dynamic application serves as your companion in the realm of data science and business analytics. Crafted with simplicity and efficiency in mind, it aims to bridge the gap between raw data and actionable insights. Whether you're a seasoned data scientist, a business analyst seeking to uncover trends, or a student diving into the world of data, this tool is designed to cater to your needs.
 
 
