@@ -298,7 +298,7 @@ def display_encode_categorical():
 
     # Allow user to choose encoding method
     encoding_method = st.selectbox("Choose an encoding method:", ["One-Hot Encoding", "Label Encoding"])
-
+    st.write("One hot puts them in different columns, Label Encoding keeps them all in the same column. ")
     if st.button("Encode"):
         if encoding_method == "One-Hot Encoding":
             # Split the comma-separated values to get a list of amenities
