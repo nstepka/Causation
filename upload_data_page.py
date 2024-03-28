@@ -23,8 +23,7 @@ import seaborn as sns
 import base64
 
 
-import streamlit as st
-import pandas as pd
+
 
 def upload_data():
     st.markdown("""
@@ -38,30 +37,34 @@ def upload_data():
     [App github page](https://github.com/nstepka/Causation)
     """)
 
-    # Button to load specific datasets
-    datasets = {
-        'Load IRIS Dataset (Clustering & Feature Selection)': 'Data/IRIS.csv',
-        'Load Churn Dataset (Classification Analysis)': 'Data/churn.csv',
-        'Load Decision Tree Classifier Dataset (Will Buy)': 'Data/DTClassiferWillBuy.csv',
-        'Load Decision Tree Regression Dataset (Loan Amount)': 'Data/DTRegressionLoan.csv',
-        'Load Park Data (Time Series ARIMA Analysis)': 'Data/ParkData_5years.csv',
-        'Load Airbnb Dataset (Price Regression & Data Exploration)': 'Data/df_selected1.csv',
-        'Load Uncleaned Airbnb File (Data Cleaning & Exploration)': 'Data/df_selected1.csv'  # Assuming this is intentional duplicate for illustration
+    # Dataset options for dropdown
+    dataset_options = {
+        'Select a Dataset': None,
+        'IRIS Dataset (Clustering & Feature Selection)': 'Data/IRIS.csv',
+        'Churn Dataset (Classification Analysis)': 'Data/churn.csv',
+        'Decision Tree Classifier Dataset (Will Buy)': 'Data/DTClassiferWillBuy.csv',
+        'Decision Tree Regression Dataset (Loan Amount)': 'Data/DTRegressionLoan.csv',
+        'Park Data (Time Series ARIMA Analysis)': 'Data/ParkData_5years.csv',
+        'Airbnb Dataset (Price Regression & Data Exploration)': 'Data/df_selected1.csv',
+        'Uncleaned Airbnb File (Data Cleaning & Exploration)': 'Data/df_selected1.csv'
     }
 
-    for button_label, file_path in datasets.items():
-        if st.button(button_label):
-            st.session_state.data = pd.read_csv(file_path)
-            st.write(f"{button_label.split('(')[0].strip()} loaded:")
-            st.write(st.session_state.data.head())
+    # Dropdown for dataset selection
+    selected_dataset = st.selectbox('Choose a dataset to load', list(dataset_options.keys()))
+
+    if selected_dataset != 'Select a Dataset':
+        dataset_path = dataset_options[selected_dataset]
+        st.session_state.data = pd.read_csv(dataset_path)
+        st.write(f"{selected_dataset.split('(')[0].strip()} loaded:")
+        st.write(st.session_state.data.head())
 
     # Option to clear the preloaded or uploaded file
     if st.button('Clear Data'):
         st.session_state.data = None
-        st.write("Data cleared. You can now upload your own dataset or load one of the default datasets.")
+        st.write("Data cleared. You can now upload your own dataset or choose another from the dropdown.")
 
     # Step 1: Upload CSV
-    uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+    uploaded_file = st.file_uploader("Or upload your CSV file", type="csv")
 
     if uploaded_file:
         st.session_state.data = pd.read_csv(uploaded_file)
@@ -80,4 +83,3 @@ def upload_data():
     Hello! I'm **Nicholas Stepka**, a recent graduate in Computer Science from Tennessee State University, where I specialized in Data Science. ...
     [Connect with me on LinkedIn](https://www.linkedin.com/in/nstepka/)
     """)
-
