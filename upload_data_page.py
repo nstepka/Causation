@@ -58,7 +58,7 @@ def upload_data():
     }
 
     # Dropdown for dataset selection
-    selected_dataset = st.selectbox('Choose a dataset to load', list(dataset_options.keys()))
+    selected_dataset = st.selectbox('Want to explore?  We have these datasets ready to preload!', list(dataset_options.keys()))
 
     if selected_dataset != 'Select a Dataset':
         dataset_path = dataset_options[selected_dataset]
