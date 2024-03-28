@@ -23,29 +23,35 @@ import seaborn as sns
 import base64
 
 
+
 def upload_data():
-
-
     st.markdown("""    
     ## About this App
     This app is designed to assist users in quick modeling and provide insights into business data science projects. 
     With a user-friendly interface, it facilitates various tasks from data upload to advanced analysis. 
     I hope this tool proves beneficial for your data science endeavors!
 
-    If you want to look at this app's code or see the datasets it works with out of the box,click the link below
+    If you want to look at this app's code or see the datasets it works with out of the box, click the link below
     
     [App github page](https://github.com/nstepka/Causation)
     """)
 
+    # Check if data is already loaded, if not load the default Iris dataset
+    if 'data' not in st.session_state or st.session_state.data is None:
+        st.session_state.data = pd.read_csv('Data/IRIS.csv') # Adjust path if necessary
+        st.write("Iris dataset loaded as default:")
+        st.write(st.session_state.data.head())
+
+    # Option to clear the preloaded file
+    if st.button('Clear Data'):
+        st.session_state.data = None
+        st.write("Data cleared. You can now upload your own dataset.")
 
     # Step 1: Upload CSV
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
     
     if uploaded_file:
-        st.session_state.original_data = pd.read_csv(uploaded_file)
-        st.session_state.data = st.session_state.original_data.copy() 
-
-        # Check if data is not None before displaying the preview
+        st.session_state.data = pd.read_csv(uploaded_file)
         st.write("Uploaded data preview:")
         st.write(st.session_state.data.head())
 
@@ -54,7 +60,7 @@ def upload_data():
             tmp_download_link = download_link(st.session_state.data, 'your_data.csv', 'Click here to download the data!')
             st.markdown(tmp_download_link, unsafe_allow_html=True)
 
-    
+    # About the author section remains unchanged
     st.markdown("""
     ## About the Author
     Hello! I'm **Nicholas Stepka**, a recent graduate in Computer Science from Tennessee State University, where I specialized in Data Science. I hold a strong passion for leveraging data to drive business solutions and innovation. My academic journey and professional experience have fostered a deep interest in business intelligence, machine learning, and statistical modeling.
