@@ -246,7 +246,7 @@ def display_data_transformation():
     )
 
     # Displaying the explanation for the selected transformation method
-    st.write(transformation_explanations[transformation_choice])
+    #st.write(transformation_explanations[transformation_choice])
 
     if st.button("Submit"):
         # Reset feedback message
