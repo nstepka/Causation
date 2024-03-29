@@ -2,6 +2,7 @@ import streamlit as st
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor, plot_tree
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, mean_squared_error, r2_score
+from sklearn.metrics import mean_absolute_error
 import matplotlib.pyplot as plt
 import pandas as pd  # Import pandas for data manipulation
 import numpy as np
@@ -99,6 +100,8 @@ def decision_tree_page():
     
                     # Model evaluation metrics
                     mse = mean_squared_error(y_test, predictions)
+                    mae = mean_absolute_error(y_test, predictions)
+                    st.write("Mean Absolute Error:", mae)
                     r2 = r2_score(y_test, predictions)
                     st.write("Mean Squared Error:", mse)
                     st.write("R^2 Score:", r2)
