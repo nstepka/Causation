@@ -125,8 +125,7 @@ def decision_tree_page():
                     plot_tree(model, filled=True, feature_names=features, class_names=class_names, ax=ax)
 
                 else:  # Regressor
-                    class_names = [str(cls) for cls in y.unique().tolist()]  # Convert class names to strings
-                    plot_tree(model, filled=True, feature_names=features, class_names=class_names, ax=ax)
+                    plot_tree(model, filled=True, feature_names=features, ax=ax)
                 st.pyplot(fig)
         else:
             st.warning("Please select at least one feature and a target.")
