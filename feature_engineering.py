@@ -224,15 +224,22 @@ def display_drop_columns():
 
 def display_data_transformation():
     st.write("Choose a data transformation method:")
+    
+    # Providing explanations for each method
+    transformation_explanations = {
+        "Normalization": "Normalization scales the data between 0 and 1, making it useful for algorithms that are sensitive to the magnitude of values.",
+        "Standardization": "Standardization scales data to have a mean of 0 and a standard deviation of 1, making it useful for algorithms that assume data is centered around zero.",
+        "Log Transformation": "Log transformation converts each number in a column to its natural logarithm, reducing the effect of extreme values (outliers).",
+        "Robust Scaling": "Robust scaling scales features using statistics that are robust to outliers. It removes the median and scales the data according to the quantile range."
+    }
 
     transformation_choice = st.selectbox(
         "Select a transformation method:",
-        ["Normalization", "Standardization", "Log Transformation", "Robust Scaling"]  # Added "Robust Scaling" to the list
+        ["Normalization", "Standardization", "Log Transformation", "Robust Scaling"]
     )
 
-    # Initialize feedback_message in session state if not present
-    if 'feedback_message' not in st.session_state:
-        st.session_state.feedback_message = ""
+    # Displaying the explanation for the selected transformation method
+    st.write(transformation_explanations[transformation_choice])
 
     if st.button("Submit"):
         # Reset feedback message
@@ -257,11 +264,10 @@ def display_data_transformation():
                 st.session_state.feedback_message = "Standardization successful!"
 
             elif transformation_choice == "Log Transformation":
-                # Adding a small constant to avoid log(0)
                 st.session_state.data[valid_cols] = np.log(st.session_state.data[valid_cols] + 1)
                 st.session_state.feedback_message = "Log Transformation successful!"
             
-            elif transformation_choice == "Robust Scaling":  # Added this section for "Robust Scaling"
+            elif transformation_choice == "Robust Scaling":
                 scaler = RobustScaler()
                 st.session_state.data[valid_cols] = scaler.fit_transform(st.session_state.data[valid_cols])
                 st.session_state.feedback_message = "Robust Scaling successful!"
@@ -271,6 +277,7 @@ def display_data_transformation():
 
     # Display feedback message below the submit button
     st.write(st.session_state.feedback_message)
+
 
 
 
