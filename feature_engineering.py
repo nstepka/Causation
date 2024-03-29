@@ -223,6 +223,9 @@ def display_drop_columns():
 
 
 def display_data_transformation():
+    # Initialize 'feedback_message' in session state if it doesn't exist
+    if 'feedback_message' not in st.session_state:
+        st.session_state['feedback_message'] = ""
     st.write("Choose a data transformation method:")
     
     # Providing explanations for each method
