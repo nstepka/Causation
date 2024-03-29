@@ -227,6 +227,10 @@ def display_data_transformation():
     if 'feedback_message' not in st.session_state:
         st.session_state['feedback_message'] = ""
     st.write("Choose a data transformation method:")
+    st.write("Normalization scales the data between 0 and 1, making it useful for algorithms that are sensitive to the magnitude of values.")
+    st.write("Standardization scales data to have a mean of 0 and a standard deviation of 1, making it useful for algorithms that assume data is centered around zero.")
+    st.write("Log transformation converts each number in a column to its natural logarithm, reducing the effect of extreme values (outliers).")
+    st.write("Robust scaling scales features using statistics that are robust to outliers. It removes the median and scales the data according to the quantile range.")
     
     # Providing explanations for each method
     transformation_explanations = {
