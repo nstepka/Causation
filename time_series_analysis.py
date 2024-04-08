@@ -83,10 +83,18 @@ def time_series_analysis():
     # ... and so on for other tasks
 
 
-def get_arima_model(data):
-    """Perform stepwise search and return the best ARIMA model."""
-    if 'arima_model' not in st.session_state:
-        st.session_state.arima_model = auto_arima(data, seasonal=True, trace=True, suppress_warnings=True)
+def get_arima_model(data, seasonal, m):
+    """Perform stepwise search and return the best ARIMA/SARIMA model."""
+    if 'arima_model' not in st.session_state or st.session_state.arima_model is None:
+        # Added user inputs for seasonality and seasonal period
+        st.session_state.arima_model = auto_arima(
+            data, 
+            seasonal=seasonal, 
+            m=m,  # Seasonal period
+            trace=True, 
+            suppress_warnings=True,
+            stepwise=True  # Utilizes stepwise algorithm for efficient search
+        )
     return st.session_state.arima_model
 
 
@@ -289,8 +297,16 @@ def infer_frequency(date_index):
         return None
 
 
+
 def fit_arima_model(y_column, date_column):
-    st.write("Fitting ARIMA Model")
+    st.write("Fitting ARIMA/SARIMA Model")
+
+    # Let the user specify if the model should include seasonality
+    seasonal = st.sidebar.checkbox("Include Seasonality", value=False)
+    m = 1  # Default to non-seasonal
+    if seasonal:
+        # Let the user specify the number of periods in a seasonal cycle
+        m = st.sidebar.number_input("Seasonal Period (m)", value=12, min_value=1, step=1)
 
     # Split data into training and test sets
     split_ratio = st.sidebar.slider("Specify the percentage of data for testing:", 10, 50, 20) / 100
@@ -303,9 +319,9 @@ def fit_arima_model(y_column, date_column):
     # Set the frequency from session state directly
     train_data.index.freq = st.session_state.selected_freq
 
-    # Get the ARIMA model
-    auto_model = get_arima_model(train_data)
-    st.write(f"Best ARIMA model: {auto_model.order}")
+    # Get the ARIMA/SARIMA model with additional seasonal parameters
+    auto_model = get_arima_model(train_data, seasonal, m)
+    st.write(f"Best ARIMA/SARIMA model: {auto_model.order}x{auto_model.seasonal_order}")
 
     # Forecast on test set
     forecast, conf_int = auto_model.predict(n_periods=len(st.session_state.data[y_column][split_index:]), return_conf_int=True)
@@ -319,7 +335,7 @@ def fit_arima_model(y_column, date_column):
     ax.plot(forecast_dates, forecast, label='Forecast', color='red')
     ax.fill_between(forecast_dates, conf_int[:, 0], conf_int[:, 1], color='pink', alpha=0.3)
 
-    ax.set_title("ARIMA Forecast vs Actuals")
+    ax.set_title("ARIMA/SARIMA Forecast vs Actuals")
     ax.legend()
     st.pyplot(fig)
 
@@ -338,8 +354,9 @@ def fit_arima_model(y_column, date_column):
         })
         csv = model_info.to_csv(index=False)
         b64 = base64.b64encode(csv.encode()).decode()
-        href = f'<a href="data:file/csv;base64,{b64}" download="arima_model.csv">Download ARIMA Model as CSV</a>'
+        href = f'<a href="data:file/csv;base64,{b64}" download="arima_sarima_model.csv">Download ARIMA/SARIMA Model as CSV</a>'
         st.markdown(href, unsafe_allow_html=True)
+
 
 
 
