@@ -83,18 +83,21 @@ def time_series_analysis():
     # ... and so on for other tasks
 
 
-def get_arima_model(data, seasonal, m):
-    """Perform stepwise search and return the best ARIMA/SARIMA model."""
+def get_arima_model(data, seasonal=False, m=1):
+    """Perform stepwise search and return the best ARIMA or SARIMA model.
+    
+    Args:
+    data: The time series data.
+    seasonal: A boolean indicating whether to account for seasonality.
+    m: The number of periods in each season. Defaults to 1 (non-seasonal).
+    """
     if 'arima_model' not in st.session_state or st.session_state.arima_model is None:
-        # Added user inputs for seasonality and seasonal period
-        st.session_state.arima_model = auto_arima(
-            data, 
-            seasonal=seasonal, 
-            m=m,  # Seasonal period
-            trace=True, 
-            suppress_warnings=True,
-            stepwise=True  # Utilizes stepwise algorithm for efficient search
-        )
+        st.session_state.arima_model = auto_arima(data,
+                                                  seasonal=seasonal,
+                                                  m=m,
+                                                  trace=True,
+                                                  suppress_warnings=True,
+                                                  stepwise=True)
     return st.session_state.arima_model
 
 
@@ -107,13 +110,24 @@ def time_series_model_diagnostics(y_column, date_column):
     data.index = pd.to_datetime(data.index)
     data.index.freq = st.session_state.selected_freq
 
-    # Get the ARIMA model
-    auto_model = get_arima_model(data)
+    # User input for seasonality
+    seasonal = st.sidebar.checkbox("Include Seasonality in Diagnostics", value=False)
+    m = 1  # Non-seasonal by default
+    if seasonal:
+        m = st.sidebar.number_input("Seasonal Period (m) for Diagnostics", value=12, min_value=1, step=1)
+
+    # Get the ARIMA model, now with seasonality parameters
+    auto_model = get_arima_model(data, seasonal=seasonal, m=m)
     p, d, q = auto_model.order
+    P, D, Q, s = auto_model.seasonal_order
 
     # Fit the model
-    model = ARIMA(data, order=(p,d,q))
+    if seasonal:
+        model = sm.tsa.statespace.SARIMAX(data, order=(p,d,q), seasonal_order=(P,D,Q,s))
+    else:
+        model = ARIMA(data, order=(p,d,q))
     results = model.fit()
+    
 
     # Extract residuals
     residuals = results.resid
